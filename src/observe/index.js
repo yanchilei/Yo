@@ -15,6 +15,15 @@ Observe.prototype.walk = function(obj){
 		if(obj.hasOwnProperty(key)){
 			val = obj[key]
 			if(typeof val === 'object'){
+        if(Object.prototype.toString.call(val) === '[object Array]'){
+          //如果是数组，则为其挂载变异的数组方法
+          if(val.__proto__){val.__proto__ = activeArray}
+          else{
+            for(let method in activeArray){
+              val[method] = activeArray.method
+            }
+          }
+        }
 				this.walk(val)
 			}else{
 				this.convert(obj, key, val)
