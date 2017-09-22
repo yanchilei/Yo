@@ -10,7 +10,6 @@ compile.prototype.compile = function(){
   for(let i=0,l=this.html.length; i<l; i++){
     this.ctx.read(this.html[i])
   }
-  return this.ctx.vdom
 }
 
 

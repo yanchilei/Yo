@@ -12,7 +12,7 @@ var Yo = function(options){
 _initMixin(Yo)
 
 var app = new Yo({
-	el:'#app',
+	el:'body',
 	data:{
 		name:'YcC',
 		outterlook:'handsome',
@@ -26,8 +26,12 @@ var app = new Yo({
 		state:function(){
 			console.log('My name is ', this.name)
 		}
-	}
+	},
+	template:`
+		<div>Hello World</div>
+	`
 })
+
 
 window.app = app
 window.activeArray = activeArray

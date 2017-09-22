@@ -4,12 +4,14 @@ var initDirective = function(Yo){
 
   Yo.prototype.initDirective = function(){
     this._doc = document
-    this._root = document.querySelector(this.el)
+    this._root = document.querySelector(this.$el)
     if(!this._root){
-      conosle.error("no bind");
+      console.error("no bind");
     }
-    var vdom = compile(this.templa)
-    vdom = vdom.vdom
+    var c = new compile(this.$template)
+    this._root.appendChild(c.ctx.vdom)
   }
 
 }
+
+export default initDirective
