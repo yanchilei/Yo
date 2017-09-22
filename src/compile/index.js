@@ -14,6 +14,4 @@ compile.prototype.compile = function(){
 }
 
 
-
-
 export default compile

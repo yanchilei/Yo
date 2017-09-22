@@ -1,5 +1,3 @@
-import state from './state'
-
 var ctx = function(){
   this.context = []
   this.stateMachine = ''
@@ -10,11 +8,18 @@ var ctx = function(){
 }
 
 ctx.prototype.read = function(sig){
+
+  //编译停止
+  if(this.stateMachine === 'stop'){
+    this.context = []
+    return
+  }
+
   //开始收集标签名
-  if(sig === '<'){
+  else if(sig === '<'){
     //或填充节点
     if(this.stateMachine === 'node'){
-      this.position.innerText = this.context.join('')
+      this.position.innerText = this.context.join('').replace(/\n/g,'')
     }
     this.setStateMachine('tagName')
     this.context = []
@@ -34,11 +39,13 @@ ctx.prototype.read = function(sig){
   //跳出元素
   else if(this.stateMachine === 'closeTag' && sig === '>'){
     this.jumpOut()
+    this.context = []
   }
 
   //准备跳出元素
   else if(sig === '/'){
     this.setStateMachine('closeTag')
+    this.context = []
   }
 
   //日常遍历
@@ -59,6 +66,8 @@ ctx.prototype.grow = function(tag){
 ctx.prototype.jumpOut = function(){
   if(this.position.parentNode){
     this.position = this.position.parentNode
+  }else{
+    this.setStateMachine('stop')
   }
 }
 
