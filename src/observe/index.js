@@ -9,7 +9,6 @@ Observe.prototype.observeData = function(data){
 }
 
 Observe.prototype.walk = function(obj){
-	console.log("walk: ", obj)
 	let val
 	for(let key in obj){
 		if(obj.hasOwnProperty(key)){
